@@ -2,23 +2,46 @@ package com.myresume.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.myresume.dtos.SkillsDTO;
+import com.myresume.enums.UserType;
 
 @Document
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private String userId;
+
+	@NotBlank
 	private String userName;
+
+	@NotBlank
+	private Date userBirthDate;
+
+	@NotBlank
 	private String userLinkedin;
+
+	@NotBlank
 	private String userGit;
+
+	@NotBlank
 	private String userPhone;
+
+	@NotBlank
 	private String userEmail;
+
+	@NotBlank
 	private String userPassword;
+
+	private UserType userType;
 
 	private List<SkillsDTO> userSkills = new ArrayList<>();
 
@@ -26,16 +49,18 @@ public class User implements Serializable {
 
 	}
 
-	public User(String userId, String userName, String userLinkedin, String userGit, String userPhone, String userEmail,
-			String userPassword, List<SkillsDTO> userSkills) {
+	public User(String userId, String userName, Date userBirthDate, String userLinkedin, String userGit,
+			String userPhone, String userEmail, String userPassword, UserType userType, List<SkillsDTO> userSkills) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
+		this.userBirthDate = userBirthDate;
 		this.userLinkedin = userLinkedin;
 		this.userGit = userGit;
 		this.userPhone = userPhone;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
+		this.userType = userType;
 		this.userSkills = userSkills;
 	}
 
@@ -53,6 +78,14 @@ public class User implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Date getUserBirthDate() {
+		return userBirthDate;
+	}
+
+	public void setUserBirthDate(Date userBirthDate) {
+		this.userBirthDate = userBirthDate;
 	}
 
 	public String getUserLinkedin() {
@@ -93,6 +126,14 @@ public class User implements Serializable {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public List<SkillsDTO> getUserSkills() {
