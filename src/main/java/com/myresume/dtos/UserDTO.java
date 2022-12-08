@@ -1,4 +1,4 @@
-package com.myresume.models;
+package com.myresume.dtos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,19 +8,14 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.myresume.dtos.SkillsDTO;
 import com.myresume.enums.UserType;
 
 @Document
-public class User implements Serializable {
+public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	private String userId;
 
 	@NotBlank
 	private String userName;
@@ -38,7 +33,6 @@ public class User implements Serializable {
 	@NotBlank
 	private String userPhone;
 
-	// must be unique
 	@NotBlank
 	private String userEmail;
 
@@ -49,14 +43,13 @@ public class User implements Serializable {
 
 	private List<SkillsDTO> userSkills = new ArrayList<>();
 
-	public User() {
+	public UserDTO() {
 
 	}
 
-	public User(String userId, String userName, Date userBirthDate, String userLinkedin, String userGit,
-			String userPhone, String userEmail, String userPassword, UserType userType, List<SkillsDTO> userSkills) {
+	public UserDTO(String userName, Date userBirthDate, String userLinkedin, String userGit, String userPhone,
+			String userEmail, String userPassword, UserType userType, List<SkillsDTO> userSkills) {
 		super();
-		this.userId = userId;
 		this.userName = userName;
 		this.userBirthDate = userBirthDate;
 		this.userLinkedin = userLinkedin;
@@ -66,14 +59,6 @@ public class User implements Serializable {
 		this.userPassword = userPassword;
 		this.userType = userType;
 		this.userSkills = userSkills;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getUserName() {
